@@ -1,28 +1,74 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+#include<conio.h>
+#include<stdio.h>
+#define max 5
+//Programa de Implementación de una estructura de datos lineal//
+struct Pila
+{
+ int tope;
+ int dato[max];
+};
+typedef struct Pila tipoPila;
+void push (tipoPila * pila, int num, int num2, int num3,int num4,int num5)
+{
+     pila->dato[pila->tope++]=num,num2,num3,num4,num5;}
+int pop (struct Pila * pila)
+{
+    return(pila->dato[--pila->tope]);}
+int vacia(struct Pila * pila)
+{
+    if (pila->tope==0) return (1); else return(0);}
+int llena(struct Pila * pila)
+{
+    if (pila->tope==max) return(1); else return(0);}
+int main()
+{
+    struct Pila pila={0};
+ char op;
+ int num;
+ int num2;
+ int num3;
+ int num4;
+ int num5;
+ do
+ {
+ printf("\n Menu:\n");
+ printf("1) Insertar libro\n");
+ printf("2) Buscar \n");
+ printf("3) Eliminar \n");
+ printf("4) Salida \n");
+ printf("Opcion: "); op=getche();
 
-# Precompiled Headers
-*.gch
-*.pch
+printf("\n \n");
+ switch(op)
+ { case '1': if(!llena(&pila) )
+ { printf("ingresa la clave del libro");
+ scanf("%d",&num);
+ printf("ingresa el titulo del libro");
+ scanf("%c",&num2);
+ printf("ingresa el numero de paginas");
+ scanf("%d",&num3);
+ printf("ingresa el nombre del autor");
+ scanf("%c",&num4);
+ printf("ingresa el nombre de la editorial");
+ scanf("%c",&num5);
+  printf("titulo de disco\n");
+ push(&pila,num,num2,num3,num4,num5);
+ }
+ else
+ { printf("Pila LLena\n");
+ getch();
+ }
+ break;
+ case '2':
+    printf("\nHay %d datos\n ",pila.tope);getch();
+ case '3': if(!vacia(&pila) )
+ printf(" %d",pop(&pila));
+ else
+ printf("La pila esta vacia\n");
+ getch();
+ break;
+ case '4': break;
+ }
+}while(op!='4');
+}
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
