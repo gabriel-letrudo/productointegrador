@@ -72,3 +72,193 @@ printf("\n \n");
 }while(op!='4');
 }
 
+
+/*===============================================================================================================================
+* Éste es el código que escribí con base al tuyo y añadiendo la estructura con los datos de los libros.
+* Por el momento corre bien el programa, sólo que tengo un problema al querer imprimir el título del libro y es que no lo imprime
+* sólo imprime unas comillas.
+
+*# include <stdio.h>
+*# include <stdlib.h>
+*# include <string.h>
+*# include <conio.h>
+*
+*# define MAX            5       //Máximo de libros a guardar en memoria.
+*# define MAX_CADENA     50      //Máximo de carácteres para una cadena.
+*# define TRUE           1
+*# define FALSE          0
+*
+*//Construímos una estructura del tipo infoLibro para almacenar los datos de los Libros
+*struct infoLibro{
+*    char titulo         [MAX_CADENA];
+*    char autor          [MAX_CADENA];
+*    char editorial      [MAX_CADENA];
+*    //Número máximo para la clave es de 6 números.
+*    char clave          [6];
+*    int numPags;
+*};
+
+*//Definimos un dato tipoLibro del tipo infoLibro.
+*typedef struct infoLibro tipoLibro;
+*
+*//Construímos una estructura del _tipoPila para el control de almacenamiento de libros.
+*struct _tipoPila{
+*    int tope;
+*    //El dato a añadir en la Pila será el Libro. De esta manera declaramos una estructura anidada del tipo infoLibro con el identificador tipoLibro,    siendo al mismo tiempo un vector de máximo 5 elementos (Libros).
+*    struct infoLibro tipoLibro  [MAX];
+*};
+*
+*//Definimos un dato tipoPila del tipo _tipoPila.
+*typedef struct _tipoPila tipoPila;
+*
+*//Inicializa la pila para almacenar los libros.
+*void inicializa(tipoPila *pPila){
+*    pPila->tope == -1;
+*}
+*
+*//Verifica si la pila está vacía.
+*int vacia(tipoPila *pPila){
+*    if(pPila->tope == -1){
+*        return TRUE;
+*    }
+*    else{
+*        return FALSE;
+*    }
+*}
+*
+*//Verifica si la pila está llena.
+*int llena(tipoPila *pPila){
+*    if(pPila->tope == MAX){
+*        return TRUE;
+*    }
+*    else{
+*        return FALSE;
+*    }
+*}
+*
+*//Obtiene el elemento tope actual de la Pila.
+*void pilaTope(tipoPila *pPila){
+*    if(vacia(pPila)){
+*        printf("Pila vacia; no hay elemento tope\n");
+*    }
+*    else{
+*        printf("%s\n",pPila->tipoLibro[pPila->tope].titulo);
+*    }
+*}
+*
+*//Agrega un Libro la Pila.
+*void push(tipoPila *pPila, tipoLibro *pLibro){
+*    //Si la pila NO está llena.
+*    if(!llena(pPila)){
+*        pPila->tipoLibro[pPila->tope++] = *pLibro;
+*    }
+*    //De lo contrario...
+*    else{
+*        printf("Memoria insuficiente\n");
+*        getch();
+*    }
+*}
+
+*//Remueve un Libro de la Pila.
+*tipoLibro pop(tipoPila *pPila){
+*    if(!vacia(pPila)){
+*        return(pPila->tipoLibro[--pPila->tope]);
+*    }
+*    if(vacia(pPila)){
+*        printf("Memoria libre; no hay libros para eliminar\n");
+*        getch();
+*    }
+*}
+*
+*//Despliega el menú de opciones.
+*void muestraMenu(void);
+*
+*/*
+* *=============================================================================================
+* */
+
+*int main(void){
+*
+*    struct _tipoPila nuevaPila;
+*    struct infoLibro nuevoLibro = {0};
+*    char tituloLibro        [MAX_CADENA];
+*    char nombreAutor        [MAX_CADENA];
+*    char nombreEditorial    [MAX_CADENA];
+*    char numeroClave        [MAX_CADENA];
+*    int Pags;
+*
+*    char op;
+*
+*    inicio:
+*
+*    system("cls");
+*    //Inicializamos la Pila para tenerla disponible y poder almacenar Libros.
+*    inicializa(&nuevaPila);
+*    //Verificamos si se están almacenando la cantidad de Libros hasta MAX (esta línea de código es sólo para probar que sí están funcionando las estructuras.
+*    printf("%d\n\n",nuevaPila.tope);
+*
+*    muestraMenu();
+*    op=getchar();
+*    //Llamamos a la función fflush para evitar bugs de carácteres.
+*    fflush(stdin);
+*
+*    switch(op){
+*    case '1':
+*        system("cls");
+*        printf("\n\n\t\t\t   ======INSERTAR LIBRO======\n\n");
+*        printf("Por favor, ingrese los datos del libro:\n\n");
+*        printf("Titulo del libro: ");
+*        scanf("%[^\n",tituloLibro);
+*        push(&nuevaPila,&nuevoLibro);
+*        //Copiamos la cadena ingresada en tituloLibro y la pasamos a nuevoLibro.titulo
+*        strcpy(nuevoLibro.titulo,tituloLibro);
+*        fflush(stdin);
+*        //La siguiente línea de código es para probar si imprime el título
+*        printf("\n\nTitulo del libro: %s",nuevoLibro.titulo);
+*        getch();
+*        goto inicio;
+*        break;
+*    case '2':
+*        system("cls");
+*        printf("\n\n\t\t\t======BUSCAR LIBRO POR CLAVE======\n\n");
+*        break;
+*    case '3':
+*        system("cls");
+*        printf("\n\n\t\t\t    ======BORRAR LIBRO======\n\n");
+*        break;
+*    case '4':
+*        system("cls");
+*        printf("\n\n\n\n\n\t\t\t\t  Hasta pronto!\n\n");
+*        EXIT_SUCCESS;
+*        break;
+*    default:
+*        printf("Opcion invalida\n");
+*        getch();
+*        goto inicio;
+*    }
+*
+*    printf("\n\n");
+*
+*    system("pause");
+*
+*    return 0;
+*}
+*
+*
+* /*
+* *=============================================================================================
+* */
+*
+*void muestraMenu(void){
+*    char menu[][26]={"Insertar libro","Buscar por clave de libro","Borrar libro","Salir"};
+*    int i;
+*
+*    printf("\n\t\t\t   ======Acervo de libros======\n\n\n");
+*    for(i=0;i<4;++i){
+*        printf("%d. %s\n",(i+1),menu[i]);
+*    }
+*    printf("\n\nOpcion: ");
+*}
+*
+*
+* */
