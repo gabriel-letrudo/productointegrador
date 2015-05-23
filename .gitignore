@@ -77,6 +77,7 @@ printf("\n \n");
 * Éste es el código que escribí con base al tuyo y añadiendo la estructura con los datos de los libros.
 * Por el momento corre bien el programa, sólo que tengo un problema al querer imprimir el título del libro y es que no lo imprime
 * sólo imprime unas comillas.
+* Para cualquier cosa mi WhatsApp es: 33 1823 3590
 
 *# include <stdio.h>
 *# include <stdlib.h>
